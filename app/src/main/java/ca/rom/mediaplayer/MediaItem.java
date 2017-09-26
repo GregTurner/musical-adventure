@@ -11,10 +11,27 @@ import org.json.JSONObject;
  * POJO For a media item
  */
 public class MediaItem {
+    /**
+     * Indicates what order the media item is in.  Only used to double check the order is
+     * correct.
+     */
     public int sequenceNumber;
+
+    /**
+     * A unique identifier for this MediaItem, i.e., GUID as string
+     */
     public String id;
+
+    /**
+     * The URL to the media resource
+     */
     public String url;
 
+    /**
+     * Constructor
+     * @param id
+     * @param sequenceNumber
+     */
     public MediaItem(String id, int sequenceNumber) {
         this.id = id;
         this.sequenceNumber = sequenceNumber;
@@ -22,7 +39,8 @@ public class MediaItem {
 }
 
 /*
-Sample response
+
+This class modelled off of this sample JSON response:
 
 
 {

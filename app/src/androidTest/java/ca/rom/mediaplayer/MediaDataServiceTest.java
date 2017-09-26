@@ -43,7 +43,9 @@ public class MediaDataServiceTest {
             // check out queue is insync
             MediaItem mediaItem = mockObserver.queue.remove();
             assertEquals(mediaItem.sequenceNumber, i);
-            mockObserver.waitUntilUpdateIsCalled();
+            if (i < mediaData.getTotalMediaItemCount() - 1) {
+                mockObserver.waitUntilUpdateIsCalled();
+            }
         }
 
     }

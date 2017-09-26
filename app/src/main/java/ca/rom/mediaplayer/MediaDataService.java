@@ -27,18 +27,47 @@ import java.util.Observable;
  * in order they are supposed to be played back in
  */
 public class MediaDataService extends Observable {
+    /**
+     * What log tag we want to use
+     */
     private static final String TAG = "MediaDataService";
-    private static final int THREAD_POOL_SIZE = 12;
 
+    /**
+     * How many HTTP threads we want to use, 4 is default can go up to 12ish but it doesn't
+     * help because the videos are fairly long
+     */
+    private static final int THREAD_POOL_SIZE = 4;
+
+    /**
+     * Our singleton instance
+     */
     private static MediaDataService mInstance;
+
+    /**
+     * The Volley request queue
+     */
     private RequestQueue mRequestQueue;
+
+    /**
+     * Application context, apparently the the warning is a false positive
+     */
     private static Context mCtx;
 
-
-
+    /**
+     * Our list of mediaitems we build from the responses of API calls
+     */
     private ArrayList<MediaItem> mediaItemList;
+
+    /**
+     * The index for the current media item with notified out observers with.  Used to serialize
+     * (aka keep in order) the data.
+     */
     public int mediaItemIndex = 0;
 
+    /**
+     * Singleton accessor
+     * @param context
+     */
     private MediaDataService(Context context) {
         mCtx = context;
         mRequestQueue = getRequestQueue();
@@ -260,6 +289,12 @@ public class MediaDataService extends Observable {
         return mRequestQueue;
     }
 
+    /**
+     * A facade on top of adding to request queue add, we don't do anything special beyond
+     * just add to the queue
+     * @param req
+     * @param <T>
+     */
     private <T> void addToRequestQueue(Request<T> req) {
         getRequestQueue().add(req);
     }

@@ -2,7 +2,4 @@
     <string name="app_name">MediaPlayer</string>
     <string name="media_list_url">https://caustic-rest-service.herokuapp.com/media</string>
 
-    <string name="title_activity_fullscreen">FullscreenActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

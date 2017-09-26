@@ -100,6 +100,13 @@ public class MainActivity extends AppCompatActivity implements Observer, Player.
         mediaDataService.refreshMediaList();
     }
 
+    /**
+     * Builds various media sources based on URI extension, in my experience its always HLS from
+     * the API
+     * @param uri
+     * @param overrideExtension
+     * @return
+     */
     private MediaSource buildMediaSource(Uri uri, String overrideExtension) {
         int type = TextUtils.isEmpty(overrideExtension) ? Util.inferContentType(uri)
                 : Util.inferContentType("." + overrideExtension);
