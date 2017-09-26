@@ -4,9 +4,26 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:keepScreenOn="true">
+    android:keepScreenOn="true"
+    android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+    android:visibility="visible"
+    tools:background="@android:color/black">
 
-    <com.google.android.exoplayer2.ui.SimpleExoPlayerView android:id="@+id/player_view"
+
+    <TextView
+        android:id="@+id/loadingText"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:text="Welcome to the ROM Media Experience.  We're getting things ready for you, please hang tight."
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textSize="18sp"
+        android:visibility="visible" />
+
+    <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+        android:id="@+id/player_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
 </FrameLayout>

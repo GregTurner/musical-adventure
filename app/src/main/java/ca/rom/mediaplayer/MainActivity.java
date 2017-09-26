@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -184,6 +185,10 @@ public class MainActivity extends AppCompatActivity implements Observer, Player.
 
         int state = player.getPlaybackState();
         Log.d(TAG, "Playing if ready, current state: " + state);
+
+        // Hide loading text
+        findViewById(R.id.loadingText).setVisibility(View.GONE);
+        findViewById(R.id.player_view).setVisibility(View.VISIBLE);
 
         if (state == Player.STATE_IDLE ||
                 state == Player.STATE_ENDED) {

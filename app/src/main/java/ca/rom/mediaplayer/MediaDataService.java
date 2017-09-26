@@ -1,6 +1,7 @@
 package ca.rom.mediaplayer;
 
 import android.content.Context;
+import android.util.JsonReader;
 import android.util.Log;
 
 import com.android.volley.Cache;
@@ -33,10 +34,10 @@ public class MediaDataService extends Observable {
     private static final String TAG = "MediaDataService";
 
     /**
-     * How many HTTP threads we want to use, 4 is default can go up to 12ish but it doesn't
-     * help because the videos are fairly long
+     * How many HTTP threads we want to use, 4 is default but we want to slow things down to
+     * not stall the CPU or bandwidth while playing.
      */
-    private static final int THREAD_POOL_SIZE = 4;
+    private static final int THREAD_POOL_SIZE = 1;
 
     /**
      * Our singleton instance
@@ -106,8 +107,15 @@ public class MediaDataService extends Observable {
                     try {
 
                         // Parse response
-                        JSONArray mediaItems = response.getJSONArray("media_items");
+                        JSONArray mediaItems = null;
+                        try {
+                            mediaItems = response.getJSONArray("media_items");
+                        }
+                        catch(JSONException e) {
+                            Log.w(TAG, "Known issue with missing media_items element, compensating...");
+                            // Find first element and use value as media_items
 
+                        }
                         // Do some sanity checks
                         if (mediaItems == null || mediaItems.length() < 1) {
                             Log.w(TAG, "Media list is empty.  This is a known issue with API.");
